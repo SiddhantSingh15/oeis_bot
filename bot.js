@@ -4,10 +4,12 @@ const axios = require('axios');
 const client = new Client();
 
 client.once('ready', () =>{
-    console.log('Ready!')
+    client.user.setActivity('!oeis', {type:"LISTENING"});
+    console.log('Ready!');
 });
 
 client.on(`message`, (message) => {
+
     if (message.content.includes('oeis-')){
         let userReq = message.content;
         let sequence = userReq.replace('oeis-','')
@@ -28,6 +30,8 @@ client.on(`message`, (message) => {
         console.log('Message sent by: ' + message.author.username);
         console.log('Sequence requested: ' + sequence);
         console.log('URL: ' + fullURL)
+    } else if (message.content.includes('!oeis')){
+        message.reply(`\n**Welcome to OEIS-Bot - The Online Encyclopedia of Integer Sequence**\n`)
     }
 });
 
